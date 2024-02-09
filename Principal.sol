@@ -1,23 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
-
-    interface IPrincipal {
-    function principalAddress() external view returns (address);
-    function teachers() external;
-   
-  
-}
-
-interface IStudent {
-       struct Student {
-        uint256 scores;
-    }
-    function student(uint _score) external returns(Student memory student);
-
-    
-}
-
 contract Principal {
     address public principal;
 
