@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
-contract Teacher {
+import "./Principal.sol";
 
-         function updateScore(uint256 id, uint256 _score) public {
-        require(
-            teachers[msg.sender],
-            "wida you!, no trespassing is allowed"
-        );
-        Student storage studentscore = student[id];
-        studentscore.scores = _score;
+contract Teacher {
+    function updateScore(uint256 id, uint256 _score) public {
+        // require(
+        //     Principal.principalAddress(msg.sender),
+        //     //  || IPrincipal(msg.sender).teachers,
+        //     "wida you!, no trespassing is allowed"
+        // );
+
+        Principal principal = Principal(msg.sender);
+        principal.updateScores(id, _score);
     }
 }
