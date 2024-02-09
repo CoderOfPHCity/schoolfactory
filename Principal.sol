@@ -1,24 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
-contract Principal{
-
+contract Principal {
     address public principal;
 
-    constructor(){
+    constructor() {
         principal = msg.sender;
     }
 
-
-        struct Student {
+    struct Student {
         string name;
         uint256 matNumber;
         uint256 scores;
     }
 
-     mapping(address => bool) public teachers;
-      Student[] public student;
-
+    mapping(address => bool) public teachers;
+    Student[] public student;
 
     modifier onlyPrincipal() {
         require(
@@ -29,17 +26,14 @@ contract Principal{
     }
 
     function principalAddress() public view returns (address) {
-    return principal;
-}
+        return principal;
+    }
 
-    
-
-      function addTeacher(address _teacher) public onlyPrincipal {
+    function addTeacher(address _teacher) public onlyPrincipal {
         teachers[_teacher] = true;
     }
 
-
-        function addstudent(
+    function addstudent(
         string memory _name,
         uint256 _matNumber,
         uint256 _scores
@@ -53,4 +47,18 @@ contract Principal{
         student.push(updateStd);
     }
 
+    function getScoreSheet() public view returns (Student[] memory) {
+        return student;
+    }
+
+    function updateScores(uint256 id, uint256 Score) public {
+        require(id < student.length, "Invalid student index");
+        require(
+            teachers[msg.sender] || principalAddress() == msg.sender,
+            "Unauthorized"
+        );
+        // student[id].scores = Score;
+        Student storage studentscore = student[id];
+        studentscore.scores = Score;
+    }
 }
