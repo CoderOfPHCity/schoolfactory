@@ -1,21 +1,41 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
+
+    interface IPrincipal {
+    function principalAddress() external view returns (address);
+    function teachers() external;
+   
+  
+}
+
+interface IStudent {
+       struct Student {
+        uint256 scores;
+    }
+    function student(uint _score) external returns(Student memory student);
+
+    
+}
+
 contract Principal {
     address public principal;
+
 
     constructor() {
         principal = msg.sender;
     }
-
-    struct Student {
+    
+     struct Student {
         string name;
         uint256 matNumber;
         uint256 scores;
     }
+  Student[] public student;
+  
 
     mapping(address => bool) public teachers;
-    Student[] public student;
+    
 
     modifier onlyPrincipal() {
         require(
@@ -25,7 +45,7 @@ contract Principal {
         _;
     }
 
-    function principalAddress() public view returns (address) {
+    function principalAddress() public  view returns (address) {
         return principal;
     }
 
