@@ -8,15 +8,17 @@ contract Factory {
 
 
 constructor(){
-    createSchool();
+       createSchool();
 
-}
-    Teacher public teachers;
+} 
     Principal public principals;
+    Teacher public teachers;
+   
 
     function createSchool() public {
+        teachers = new Teacher(address(principals)); 
         principals = new Principal();
-        teachers = new Teacher();
+       
 
     }
 }
