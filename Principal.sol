@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8;
 
+interface PrincipalInterface {
+    function updateScores(uint256 id, uint256 Score) external;
+}
+
 contract Principal {
     address public principal;
 
